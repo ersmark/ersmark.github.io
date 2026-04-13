@@ -7,7 +7,7 @@
   <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,300&display=swap" rel="stylesheet" />
  
   <!-- Lucide icons via CDN -->
-  <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
+
  
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -322,7 +322,7 @@
        TECH + SPRINT TIMELINE
     ══════════════════════════════════════ */
     .tech { background: var(--white); }
-    .tech-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 5.5rem; align-items: start; }
+    .tech-grid { display: grid; grid-template-columns: 1fr; gap: 5.5rem; align-items: start; }
     .stack { margin-top: 2.2rem; }
     .stack-row {
       display: flex; align-items: center; gap: 1rem;
@@ -333,59 +333,6 @@
     .s-name { font-weight: 600; font-size: .9rem; color: var(--green-deep); min-width: 138px; }
     .s-desc { font-size: .845rem; color: var(--text-muted); }
  
-    /* ── Animated Timeline ── */
-    .timeline { margin-top: 2.2rem; position: relative; }
-    .tl-item {
-      display: flex; gap: 1.1rem; margin-bottom: 0;
-      position: relative;
-      opacity: 0; transform: translateX(-12px);
-      transition: opacity .5s ease, transform .5s ease;
-    }
-    .tl-item.tl-visible { opacity: 1; transform: translateX(0); }
- 
-    /* vertical connector line */
-    .tl-left { display: flex; flex-direction: column; align-items: center; flex-shrink: 0; }
-    .tl-dot {
-      width: 28px; height: 28px; border-radius: 50%;
-      border: 2px solid var(--cream-warm);
-      background: var(--white);
-      display: flex; align-items: center; justify-content: center;
-      flex-shrink: 0; z-index: 1;
-      transition: border-color .3s, background .3s;
-    }
-    .tl-dot svg { width: .7rem; height: .7rem; color: var(--text-muted); }
-    .tl-dot.completed { border-color: var(--green-mid); background: var(--green-mid); }
-    .tl-dot.completed svg { color: var(--white); }
-    .tl-dot.active { border-color: var(--green-bright); background: var(--white); animation: pulse-border 1.6s ease-in-out infinite; }
-    .tl-dot.active svg { color: var(--green-bright); }
-    .tl-dot.pending { border-color: var(--cream-warm); }
-    .tl-dot.pending svg { color: var(--text-muted); opacity: .5; }
-    @keyframes pulse-border {
-      0%,100% { box-shadow: 0 0 0 0 rgba(82,183,136,.4); }
-      50%      { box-shadow: 0 0 0 6px rgba(82,183,136,0); }
-    }
-    .tl-line {
-      width: 2px; flex: 1; min-height: 24px;
-      background: var(--cream-warm);
-      margin: 2px 0;
-    }
-    .tl-line.completed { background: var(--green-mid); }
-    .tl-item:last-child .tl-line { display: none; }
- 
-    .tl-body { padding-bottom: 1.5rem; }
-    .tl-status-row { display: flex; align-items: center; gap: .55rem; margin-bottom: .22rem; }
-    .tl-week {
-      font-size: .68rem; font-weight: 700; letter-spacing: .07em; text-transform: uppercase;
-      color: var(--green-bright);
-    }
-    .tl-badge {
-      font-size: .65rem; font-weight: 600; padding: .12rem .55rem; border-radius: 2rem;
-    }
-    .tl-badge.completed { background: rgba(45,106,79,.12); color: var(--green-mid); }
-    .tl-badge.active    { background: rgba(82,183,136,.18); color: var(--green-mid); }
-    .tl-badge.pending   { background: var(--cream-warm); color: var(--text-muted); }
-    .tl-body h4 { font-size: .9rem; font-weight: 600; color: var(--green-deep); margin-bottom: .22rem; }
-    .tl-body p  { font-size: .84rem; line-height: 1.65; color: var(--text-muted); }
  
     /* ══════════════════════════════════════
        ABOUT
@@ -504,6 +451,91 @@
       .collab-cell + .collab-cell { border-left: none; border-top: 1px solid rgba(255,255,255,.09); }
       .hero-btns { flex-direction: column; }
     }
+
+    /* ══════════════════════════════════════
+       DEV LOG
+    ══════════════════════════════════════ */
+    .devlog { background: var(--white); }
+    .devlog-feed {
+      margin-top: 2.5rem;
+      display: flex;
+      flex-direction: column;
+      gap: .75rem;
+    }
+    .dl-entry {
+      display: grid;
+      grid-template-columns: 90px 1fr;
+      gap: 0 1.4rem;
+      align-items: start;
+      opacity: 0; transform: translateY(8px);
+      transition: opacity .4s ease, transform .4s ease;
+    }
+    .dl-entry.dl-visible { opacity: 1; transform: translateY(0); }
+
+    .dl-date {
+      text-align: right;
+      padding-top: .55rem;
+      flex-shrink: 0;
+    }
+    .dl-date-day {
+      font-family: 'DM Serif Display', serif;
+      font-size: 1.45rem; color: var(--green-deep); line-height: 1;
+    }
+    .dl-date-month {
+      font-size: .62rem; font-weight: 700;
+      letter-spacing: .09em; text-transform: uppercase;
+      color: var(--green-bright); margin-top: .05rem;
+    }
+
+    .dl-card {
+      background: var(--cream);
+      border: 1px solid var(--cream-warm);
+      border-radius: .75rem;
+      padding: 1rem 1.3rem;
+      transition: box-shadow .18s;
+    }
+    .dl-card:hover { box-shadow: 0 6px 22px rgba(26,58,42,.08); }
+    .dl-card-header {
+      display: flex; align-items: center; gap: .6rem;
+      margin-bottom: .35rem;
+    }
+    .dl-title {
+      font-weight: 600; font-size: .92rem;
+      color: var(--green-deep); flex: 1;
+    }
+    .dl-tag {
+      font-size: .62rem; font-weight: 700;
+      letter-spacing: .06em; text-transform: uppercase;
+      padding: .15rem .55rem; border-radius: 2rem; flex-shrink: 0;
+    }
+    .dl-tag.planning  { background: rgba(82,183,136,.14); color: var(--green-mid); }
+    .dl-tag.dev       { background: rgba(45,106,79,.12);  color: var(--green-mid); }
+    .dl-tag.milestone { background: rgba(244,162,97,.18); color: #b5541a; }
+    .dl-tag.review    { background: rgba(26,58,42,.1);    color: var(--green-deep); }
+    .dl-body {
+      font-size: .845rem; line-height: 1.68;
+      color: var(--text-muted);
+    }
+    .dl-authors {
+      display: flex; align-items: center; gap: .4rem;
+      margin-top: .6rem;
+    }
+    .dl-avatar {
+      width: 1.5rem; height: 1.5rem; border-radius: 50%;
+      background: var(--green-pale);
+      display: flex; align-items: center; justify-content: center;
+      font-family: 'DM Serif Display', serif;
+      font-size: .64rem; color: var(--green-mid);
+      border: 1.5px solid var(--white);
+      margin-left: -.3rem;
+    }
+    .dl-avatar:first-child { margin-left: 0; }
+    .dl-author-label { font-size: .72rem; color: var(--text-muted); margin-left: .2rem; }
+
+    @media (max-width: 600px) {
+      .dl-entry { grid-template-columns: 64px 1fr; gap: 0 1rem; }
+      .dl-date-day { font-size: 1.1rem; }
+    }
   </style>
 </head>
 <body>
@@ -524,16 +556,17 @@
       <li><a href="#tech" data-i18n="nav_tech">Technology</a></li>
       <li><a href="#about" data-i18n="nav_about">About</a></li>
       <li><a href="#contact" data-i18n="nav_contact">Contact</a></li>
+      <li><a href="#devlog" data-i18n="nav_devlog">Dev Log</a></li>
     </ul>
   </div>
   <div class="nav-right">
     <span class="nav-course">II1305 · KTH</span>
     <div class="lang-toggle">
       <button class="lang-btn active" data-lang-btn="en">
-        <span class="flag">🇺🇸</span> Eng
+        <span class="flag"></span> Eng
       </button>
       <button class="lang-btn" data-lang-btn="sv">
-        <span class="flag">🇸🇪</span> Sve
+        <span class="flag"></span> Sve
       </button>
     </div>
   </div>
@@ -689,7 +722,6 @@
         </div>
         <div class="sol-row">
           <div class="sol-badge"><i data-lucide="lightbulb"></i> <span data-i18n="sb5">Personalised sorting tips</span></div>
-          <div class="sol-badge"><i data-lucide="smartphone"></i> <span data-i18n="sb6">Mobile responsive</span></div>
         </div>
         <div class="sol-stats">
           <div class="sol-stat">
@@ -699,10 +731,6 @@
           <div class="sol-stat">
             <div class="sol-stat-v">5</div>
             <div class="sol-stat-l" data-i18n="ss2">core features</div>
-          </div>
-          <div class="sol-stat">
-            <div class="sol-stat-v">1</div>
-            <div class="sol-stat-l" data-i18n="ss3">goal: clarity</div>
           </div>
         </div>
       </div>
@@ -741,11 +769,6 @@
       <div class="f-ico"><i data-lucide="message-square"></i></div>
       <h3 data-i18n="f5_h">AI Chatbot (Claude-powered)</h3>
       <p data-i18n="f5_p">Ask questions in plain language. The assistant is grounded in the BRF's actual sorting data and national sorting regulations, so answers are specific and actionable rather than generic.</p>
-    </div>
-    <div class="f-card">
-      <div class="f-ico"><i data-lucide="smartphone"></i></div>
-      <h3 data-i18n="f6_h">Mobile Responsive Design</h3>
-      <p data-i18n="f6_p">The full application — dashboard, charts, chatbot, and reports — works seamlessly on smartphones so board members can check in from anywhere, at any time.</p>
     </div>
   </div>
 </section>
@@ -797,75 +820,7 @@
       </div>
     </div>
  
-    <!-- TIMELINE RIGHT COLUMN -->
-    <div>
-      <div class="lbl" data-i18n="tl_lbl">Project Progress</div>
-      <h2 class="ttl" style="max-width:360px;" data-i18n="tl_ttl">Four sprints.<br>Four weeks.<br>One working app.</h2>
- 
-      <div class="timeline" id="timeline">
- 
-        <div class="tl-item" data-tl-status="completed">
-          <div class="tl-left">
-            <div class="tl-dot completed"><i data-lucide="check"></i></div>
-            <div class="tl-line completed"></div>
-          </div>
-          <div class="tl-body">
-            <div class="tl-status-row">
-              <span class="tl-week" data-i18n="tl_week1">Week 1</span>
-              <span class="tl-badge completed" data-i18n="tl_done">Completed</span>
-            </div>
-            <h4 data-i18n="tl1_h">Kickoff &amp; Technical Design</h4>
-            <p data-i18n="tl1_p">Requirements, database schema, dev environment, CI/CD, Sortrace API decision, data abstraction layer, and wireframes.</p>
-          </div>
-        </div>
- 
-        <div class="tl-item" data-tl-status="active">
-          <div class="tl-left">
-            <div class="tl-dot active"><i data-lucide="clock"></i></div>
-            <div class="tl-line"></div>
-          </div>
-          <div class="tl-body">
-            <div class="tl-status-row">
-              <span class="tl-week" data-i18n="tl_week2">Week 2</span>
-              <span class="tl-badge active" data-i18n="tl_active">In Progress</span>
-            </div>
-            <h4 data-i18n="tl2_h">Frontend &amp; Backend Foundation</h4>
-            <p data-i18n="tl2_p">Authentication, dashboard layout, chart components, API routes, and seed data — the complete working app skeleton.</p>
-          </div>
-        </div>
- 
-        <div class="tl-item" data-tl-status="pending">
-          <div class="tl-left">
-            <div class="tl-dot pending"><i data-lucide="circle"></i></div>
-            <div class="tl-line"></div>
-          </div>
-          <div class="tl-body">
-            <div class="tl-status-row">
-              <span class="tl-week" data-i18n="tl_week3">Week 3</span>
-              <span class="tl-badge pending" data-i18n="tl_pending">Upcoming</span>
-            </div>
-            <h4 data-i18n="tl3_h">AI Chatbot, Reports &amp; Advice</h4>
-            <p data-i18n="tl3_p">Claude API integration with RAG pipeline, PDF report generation, personalised sorting tips, and the sorting guide page.</p>
-          </div>
-        </div>
- 
-        <div class="tl-item" data-tl-status="pending">
-          <div class="tl-left">
-            <div class="tl-dot pending"><i data-lucide="circle"></i></div>
-            <div class="tl-line"></div>
-          </div>
-          <div class="tl-body">
-            <div class="tl-status-row">
-              <span class="tl-week" data-i18n="tl_week4">Week 4</span>
-              <span class="tl-badge pending" data-i18n="tl_pending">Upcoming</span>
-            </div>
-            <h4 data-i18n="tl4_h">Testing, Delivery &amp; Handover</h4>
-            <p data-i18n="tl4_p">End-to-end and unit tests, performance and accessibility audit, GDPR review, user documentation, and formal handover to Sortrace.</p>
-          </div>
-        </div>
- 
-      </div>
-    </div>
+
   </div>
 </section>
  
@@ -908,6 +863,36 @@
   </div>
 </section>
  
+<!-- ══════════════════════════════════
+     DEV LOG
+══════════════════════════════════ -->
+<section class="devlog" id="devlog">
+  <div class="lbl" data-i18n="devlog_lbl">Dev Log</div>
+  <h2 class="ttl" data-i18n="devlog_ttl">Day-by-day progress</h2>
+
+  <div class="devlog-feed" id="devlogFeed">
+    <!--
+      HOW TO ADD AN ENTRY — copy one block below, paste at the TOP, update:
+        data-dl-day / data-dl-month  →  date
+        dl-tag class                 →  planning | dev | milestone | review
+        dl-title, dl-body            →  your text
+    -->
+
+    <!-- ─── Apr 13 ─── -->
+    <div class="dl-entry">
+      <div class="dl-date"><div class="dl-date-day">13</div><div class="dl-date-month">Apr</div></div>
+      <div class="dl-card">
+        <div class="dl-card-header">
+          <div class="dl-title">Day 1</div>
+          <span class="dl-tag dev">Dev</span>
+        </div>
+        <div class="dl-body">Today, we created the project website and began working on the web application. Since we currently do not have access to the required data, we integrated an AI solution to help move development forward. This allows us to continue building and testing key features while waiting for data access.</div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
 <!-- ══════════════════════════════════
      CONTACT
 ══════════════════════════════════ -->
@@ -1001,7 +986,7 @@
 const i18n = {
   en: {
     nav_problem:"Problem", nav_solution:"Solution", nav_features:"Features",
-    nav_tech:"Technology", nav_about:"About", nav_contact:"Contact",
+    nav_tech:"Technology", nav_about:"About", nav_contact:"Contact", nav_devlog:"Dev Log",
     hero_eyebrow:"Built for BRF board members",
     hero_h1_line1:"Making waste data",
     hero_h1_line2:"for housing boards",
@@ -1027,24 +1012,16 @@ const i18n = {
     sol_bdy1:"We are building a web application designed specifically for BRF board members. It sits on top of Sortrace's data infrastructure and translates raw sorting events into visual dashboards, material-level breakdowns, and practical recommendations — without requiring any technical knowledge.",
     sol_bdy2:"Each association accesses only its own data through a secure login. The interface is deliberately simple: everything a board needs to understand how their building sorts waste and what to do about it. Nothing more, nothing less.",
     sb1:"Visual trend dashboards", sb2:"Secure BRF login", sb3:"AI-powered chatbot",
-    sb4:"One-click PDF reports", sb5:"Personalised sorting tips", sb6:"Mobile responsive",
-    ss1:"week sprint plan", ss2:"core features", ss3:"goal: clarity",
+    sb4:"One-click PDF reports", sb5:"Personalised sorting tips",
+    ss1:"week sprint plan", ss2:"core features",
     feat_lbl:"Core Features", feat_ttl:"Everything a BRF board needs — nothing it doesn't",
     f1_h:"Secure Login & BRF Isolation", f1_p:"Board members sign in with email and password. Row-level security in the database ensures every association sees only its own data — fully GDPR compliant from day one.",
     f2_h:"Dashboard with KPIs & Charts", f2_p:"Miss-sorting rate, total pickups analysed, trend lines over time, and a material breakdown — all at a glance. Filter by date range, material type, or container.",
     f3_h:"Sorting Guide & Personalised Tips", f3_p:"A built-in guide explains proper sorting per material type. The dashboard also surfaces personalised tips that highlight the specific materials where the BRF underperforms most.",
     f4_h:"PDF & CSV Report Export", f4_p:"Generate board-ready reports with KPIs, charts, and material breakdowns. Choose the time period — monthly, quarterly, or yearly — and export in one click, ready for the next board meeting.",
     f5_h:"AI Chatbot (Claude-powered)", f5_p:"Ask questions in plain language. The assistant is grounded in the BRF's actual sorting data and national sorting regulations, so answers are specific and actionable rather than generic.",
-    f6_h:"Mobile Responsive Design", f6_p:"The full application — dashboard, charts, chatbot, and reports — works seamlessly on smartphones so board members can check in from anywhere, at any time.",
     tech_lbl:"Technology Stack", tech_ttl:"Built on a modern, <em>production-ready</em> foundation",
     tech_bdy:"The application is architected for real-world deployment. A data abstraction layer allows development against realistic seed data and a seamless swap to the live Sortrace API later without rewriting the application.",
-    tl_lbl:"Project Progress", tl_ttl:"Four sprints.<br>Four weeks.<br>One working app.",
-    tl_week1:"Week 1", tl_week2:"Week 2", tl_week3:"Week 3", tl_week4:"Week 4",
-    tl_done:"Completed", tl_active:"In Progress", tl_pending:"Upcoming",
-    tl1_h:"Kickoff & Technical Design", tl1_p:"Requirements, database schema, dev environment, CI/CD, Sortrace API decision, data abstraction layer, and wireframes.",
-    tl2_h:"Frontend & Backend Foundation", tl2_p:"Authentication, dashboard layout, chart components, API routes, and seed data — the complete working app skeleton.",
-    tl3_h:"AI Chatbot, Reports & Advice", tl3_p:"Claude API integration with RAG pipeline, PDF report generation, personalised sorting tips, and the sorting guide page.",
-    tl4_h:"Testing, Delivery & Handover", tl4_p:"End-to-end and unit tests, performance and accessibility audit, GDPR review, user documentation, and formal handover to Sortrace.",
     about_lbl:"About This Project",
     about_ttl:"A student project built for a real startup — with real-world impact",
     about_bdy:"This application is developed as an external project in collaboration with Sortrace, a Swedish AI startup redefining how waste sorting data is collected and understood. The project is part of course II1305 at KTH Royal Institute of Technology, where Civil Engineering students in Information Technology design and build real software products together with industry partners. Our goal is to bridge the gap between data collection and data understanding — giving BRF boards the tools to make their buildings greener and more sustainable.",
@@ -1057,10 +1034,12 @@ const i18n = {
     contact_bdy:"Have questions about the project, want to learn more, or are interested in a collaboration? Reach out to any member of Group Ersmark directly.",
     role_po:"Product Owner", role_sm:"Scrum Master", role_dev:"Developer",
     footer_text:"Sortrace Waste App &nbsp;·&nbsp; II1305 Project &nbsp;·&nbsp; Group Ersmark at KTH &nbsp;·&nbsp; Spring 2026",
+    devlog_lbl:"Dev Log", devlog_ttl:"Day-by-day progress",
+    devlog_bdy:"A running record of what the team built and shipped. Add new entries at the top of the #devlogFeed div in the HTML.",
   },
   sv: {
     nav_problem:"Problem", nav_solution:"Lösning", nav_features:"Funktioner",
-    nav_tech:"Teknologi", nav_about:"Om projektet", nav_contact:"Kontakt",
+    nav_tech:"Teknologi", nav_about:"Om projektet", nav_contact:"Kontakt", nav_devlog:"Dagbok",
     hero_eyebrow:"Byggt för BRF-styrelser",
     hero_h1_line1:"Gör avfallsdata",
     hero_h1_line2:"för bostadsrättsföreningar",
@@ -1086,24 +1065,16 @@ const i18n = {
     sol_bdy1:"Vi bygger en webbapplikation utformad specifikt för BRF-styrelser. Den vilar ovanpå Sortrace dataplattform och omvandlar råa sorteringshändelser till visuella dashboards, materialuppdelningar och praktiska rekommendationer — utan tekniska förkunskaper.",
     sol_bdy2:"Varje förening når enbart sin egen data via inloggning. Gränssnittet är medvetet enkelt: allt en styrelse behöver för att förstå hur fastigheten sorterar och vad som bör göras åt det. Inget mer, inget mindre.",
     sb1:"Visuella trenddashboards", sb2:"Säker BRF-inloggning", sb3:"AI-driven chatbot",
-    sb4:"PDF-rapporter med ett klick", sb5:"Personliga sorteringstips", sb6:"Mobilanpassat",
-    ss1:"veckorssprint-plan", ss2:"kärnfunktioner", ss3:"mål: tydlighet",
+    sb4:"PDF-rapporter med ett klick", sb5:"Personliga sorteringstips",
+    ss1:"veckorssprint-plan", ss2:"kärnfunktioner",
     feat_lbl:"Kärnfunktioner", feat_ttl:"Allt en BRF-styrelse behöver — inget den inte behöver",
     f1_h:"Säker inloggning & BRF-isolering", f1_p:"Styrelseledamöter loggar in med e-post och lösenord. Radnivåsäkerhet i databasen säkerställer att varje förening enbart ser sin egen data — GDPR-anpassat från dag ett.",
     f2_h:"Dashboard med nyckeltal & diagram", f2_p:"Felsorteringsandel, totalt antal analyser, trendlinjer över tid och materialuppdelning — allt i en överblick. Filtrera efter tidsperiod, materialtyp eller kärl.",
     f3_h:"Sorteringsguide & personliga tips", f3_p:"En inbyggd guide förklarar korrekt sortering per materialtyp. Dashboarden lyfter också fram personliga tips för de specifika material där BRF:en underpresterar mest.",
     f4_h:"PDF- & CSV-rapportexport", f4_p:"Generera styrelseredo rapporter med nyckeltal, diagram och materialuppdelningar. Välj tidsperiod — månads-, kvartals- eller årsvis — och exportera med ett klick.",
     f5_h:"AI-chatbot (Claude-driven)", f5_p:"Ställ frågor på vanlig svenska. Assistenten baseras på BRF:ens faktiska sorteringsdata och nationella sorteringsregler, vilket ger specifika och handlingsinriktade svar.",
-    f6_h:"Mobilanpassad design", f6_p:"Hela applikationen — dashboard, diagram, chatbot och rapporter — fungerar sömlöst på smartphone så att styrelseledamöter kan följa upp var som helst, när som helst.",
     tech_lbl:"Teknologistack", tech_ttl:"Byggd på en modern, <em>driftsättningsklar</em> grund",
     tech_bdy:"Applikationen är arkitekterad för verklig driftsättning. Ett dataabstraheringslager möjliggör utveckling mot realistisk testdata och ett sömlöst byte till det riktiga Sortrace API:et senare utan att skriva om applikationen.",
-    tl_lbl:"Projektframsteg", tl_ttl:"Fyra sprintar.<br>Fyra veckor.<br>En färdig app.",
-    tl_week1:"Vecka 1", tl_week2:"Vecka 2", tl_week3:"Vecka 3", tl_week4:"Vecka 4",
-    tl_done:"Slutförd", tl_active:"Pågående", tl_pending:"Kommande",
-    tl1_h:"Uppstart & teknisk design", tl1_p:"Kravspecifikation, databasschema, utvecklingsmiljö, CI/CD, Sortrace API-beslut, dataabstraheringslager och wireframes.",
-    tl2_h:"Frontend & backend-grund", tl2_p:"Autentisering, dashboardlayout, diagramkomponenter, API-rutter och testdata — hela appens fungerande skelett.",
-    tl3_h:"AI-chatbot, rapporter & råd", tl3_p:"Claude API-integration med RAG-pipeline, PDF-rapportgenerering, personliga sorteringstips och sorteringsguide.",
-    tl4_h:"Testning, leverans & överlämning", tl4_p:"Heltäckande tester, prestanda- och tillgänglighetsrevision, GDPR-genomgång, användardokumentation och formell överlämning till Sortrace.",
     about_lbl:"Om projektet",
     about_ttl:"Ett studentprojekt byggt för ett riktigt startup — med verklig påverkan",
     about_bdy:"Denna applikation utvecklas som ett externt projekt i samarbete med Sortrace, ett svenskt AI-startup som omdefinierar hur avfallssorteringsdata samlas in och förstås. Projektet ingår i kursen II1305 vid KTH, där civilingenjörsstudenter inom informationsteknik utformar och bygger riktiga mjukvaruprodukter tillsammans med industriparter. Vårt mål är att överbrygga klyftan mellan datainsamling och dataförståelse — och ge BRF-styrelser verktygen att göra sina fastigheter grönare och mer hållbara.",
@@ -1116,6 +1087,8 @@ const i18n = {
     contact_bdy:"Har du frågor om projektet, vill lära dig mer eller är intresserad av samarbete? Kontakta valfri medlem i Grupp Ersmark direkt.",
     role_po:"Produktägare", role_sm:"Scrum Master", role_dev:"Utvecklare",
     footer_text:"Sortrace Waste App &nbsp;·&nbsp; II1305 Projekt &nbsp;·&nbsp; Grupp Ersmark vid KTH &nbsp;·&nbsp; Vår 2026",
+    devlog_lbl:"Dagbok", devlog_ttl:"Dag-för-dag-framsteg",
+    devlog_bdy:"En löpande logg över vad teamet byggt och levererat. Lägg till nya inlägg längst upp i #devlogFeed-diven i HTML-koden.",
   }
 };
  
@@ -1209,34 +1182,22 @@ document.querySelectorAll('[data-lang-btn]').forEach(btn => {
   });
 })();
  
+
+
 /* ─────────────────────────────────────────
-   TIMELINE SCROLL ANIMATION
+   DEV LOG SCROLL ANIMATION
 ───────────────────────────────────────── */
 (function() {
-  const items = document.querySelectorAll('.tl-item');
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        // stagger siblings
-        const siblings = [...entry.target.parentElement.querySelectorAll('.tl-item')];
-        const idx = siblings.indexOf(entry.target);
-        setTimeout(() => entry.target.classList.add('tl-visible'), idx * 120);
-        observer.unobserve(entry.target);
-      }
+  const entries = document.querySelectorAll('.dl-entry');
+  const obs = new IntersectionObserver(list => {
+    list.forEach((e, i) => {
+      if (e.isIntersecting) setTimeout(() => e.target.classList.add('dl-visible'), i * 60);
     });
-  }, { threshold: 0.15 });
- 
-  items.forEach(item => observer.observe(item));
+  }, { threshold: 0.1 });
+  entries.forEach(el => obs.observe(el));
 })();
- 
-/* ─────────────────────────────────────────
-   INIT LUCIDE ICONS
-───────────────────────────────────────── */
-window.addEventListener('DOMContentLoaded', () => {
-  if (window.lucide) lucide.createIcons();
-});
+
 </script>
- 
+<script src="https://unpkg.com/lucide@0.383.0/dist/umd/lucide.min.js" onload="lucide.createIcons()"></script>
 </body>
 </html>
- 
