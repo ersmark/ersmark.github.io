@@ -400,8 +400,11 @@
     ══════════════════════════════════════ */
     .contact { background: var(--cream); }
     .contact-grid {
-      display: grid; grid-template-columns: repeat(auto-fill, minmax(240px,1fr));
-      gap: 1.1rem; margin-top: 2.5rem;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      align-items: center;
+      gap: 1.5rem;
     }
     .contact-card {
       background: var(--white); border-radius: .8rem; padding: 1.35rem 1.5rem;
@@ -464,6 +467,18 @@
       .collab { flex-direction: column; }
       .collab-cell + .collab-cell { border-left: none; border-top: 1px solid rgba(255,255,255,.09); }
       .hero-btns { flex-direction: column; }
+    }
+
+    @media (max-width: 768px) {
+      .contact-grid {
+        flex-direction: column;
+        align-items: stretch;
+        margin: 0 56px;
+      }
+
+      .contact-card {
+        width: 100%;
+      }
     }
 
     /* ══════════════════════════════════════
@@ -964,35 +979,35 @@ const i18n = {
     p2_h:"No visual overview", p2_p:"Without charts, trend lines, and material breakdowns, boards cannot see where sorting is failing, how it compares to previous periods, or which materials cause the most problems.",
     p3_h:"Manual reporting burden", p3_p:"Preparing reports for board meetings and resident communication is time-consuming, done from scratch each time, with no standardised format or template to rely on.",
     p4_h:"No guidance on next steps", p4_p:"Even when boards can see the numbers, they often lack practical advice on what to actually do about them — especially for the worst-performing materials and containers.",
-    sol_lbl:"Vår lösning",
-    sol_ttl:"En tydlig dashboard som omvandlar sorteringsdata till <em>styrelseredo insikter</em>",
-    sol_bdy1:"Vi bygger en webbapplikation utformad specifikt för BRF-styrelser. Den vilar ovanpå Sortrace dataplattform och omvandlar råa sorteringshändelser till visuella dashboards, materialuppdelningar och praktiska rekommendationer — utan tekniska förkunskaper.",
-    sol_bdy2:"Varje förening når enbart sin egen data via inloggning. Gränssnittet är medvetet enkelt: allt en styrelse behöver för att förstå hur fastigheten sorterar och vad som bör göras åt det. Inget mer, inget mindre.",
-    sb1:"Visuella trenddashboards", sb2:"Säker BRF-inloggning", sb3:"AI-driven chatbot",
-    sb4:"PDF-rapporter med ett klick", sb5:"Personliga sorteringstips",
-    ss1:"veckorssprint-plan", ss2:"kärnfunktioner",
-    feat_lbl:"Kärnfunktioner", feat_ttl:"Allt en BRF-styrelse behöver — inget den inte behöver",
-    f1_h:"Säker inloggning & BRF-isolering", f1_p:"Styrelseledamöter loggar in med e-post och lösenord. Radnivåsäkerhet i databasen säkerställer att varje förening enbart ser sin egen data — GDPR-anpassat från dag ett.",
-    f2_h:"Dashboard med nyckeltal & diagram", f2_p:"Felsorteringsandel, totalt antal analyser, trendlinjer över tid och materialuppdelning — allt i en överblick. Filtrera efter tidsperiod, materialtyp eller kärl.",
-    f3_h:"Sorteringsguide & personliga tips", f3_p:"En inbyggd guide förklarar korrekt sortering per materialtyp. Dashboarden lyfter också fram personliga tips för de specifika material där BRF:en underpresterar mest.",
-    f4_h:"PDF- & CSV-rapportexport", f4_p:"Generera styrelseredo rapporter med nyckeltal, diagram och materialuppdelningar. Välj tidsperiod — månads-, kvartals- eller årsvis — och exportera med ett klick.",
-    f5_h:"AI-chatbot", f5_p:"Ställ frågor på vanlig svenska. Assistenten baseras på BRF:ens faktiska sorteringsdata och nationella sorteringsregler, vilket ger specifika och handlingsinriktade svar.",
-    tech_lbl:"Teknologistack", tech_ttl:"Byggd på en modern, <em>driftsättningsklar</em> grund",
-    tech_bdy:"Applikationen är arkitekterad för verklig driftsättning. Ett dataabstraheringslager möjliggör utveckling mot realistisk testdata och ett sömlöst byte till det riktiga Sortrace API:et senare utan att skriva om applikationen.",
-    about_lbl:"Om projektet",
-    about_ttl:"Ett studentprojekt byggt för ett riktigt startup — med verklig påverkan",
-    about_bdy:"Denna applikation utvecklas som ett externt projekt i samarbete med Sortrace, ett svenskt AI-startup som omdefinierar hur avfallssorteringsdata samlas in och förstås. Projektet ingår i kursen II1305 vid KTH, där civilingenjörsstudenter inom informationsteknik utformar och bygger riktiga mjukvaruprodukter tillsammans med industriparter. Vårt mål är att överbrygga klyftan mellan datainsamling och dataförståelse — och ge BRF-styrelser verktygen att göra sina fastigheter grönare och mer hållbara.",
-    cc1_sub:"Extern partner", cc1_det:"AI-driven avfallsanalys · Sverige",
-    cc2_sub:"Lärosäte", cc2_det:"Civilingenjör · Informationsteknik",
-    cc3_sub:"Studentgrupp", cc3_det:"Kurs II1305 · Vår 2026",
-    course_pill:"Kurs <strong>II1305</strong> — Projekt i informationsteknik &nbsp;·&nbsp; KTH &nbsp;·&nbsp; Vår 2026",
-    contact_lbl:"Kontakta teamet",
-    contact_ttl:"Ta kontakt med utvecklingsteamet",
-    contact_bdy:"Har du frågor om projektet, vill lära dig mer eller är intresserad av samarbete? Kontakta valfri medlem i Grupp Ersmark direkt.",
-    role_po:"Produktägare", role_sm:"Scrum Master", role_dev:"Utvecklare",
-    footer_text:"Sortrace Waste App &nbsp;·&nbsp; II1305 Projekt &nbsp;·&nbsp; Grupp Ersmark vid KTH &nbsp;·&nbsp; Vår 2026",
-    devlog_lbl:"Dagbok", devlog_ttl:"Dag-för-dag-framsteg",
-    devlog_bdy:"En löpande logg över vad teamet byggt och levererat. Lägg till nya inlägg längst upp i #devlogFeed-diven i HTML-koden.",
+    sol_lbl:"Our Solution",
+    sol_ttl:"A clear dashboard that turns sorting data into <em>board-ready insights</em>",
+    sol_bdy1:"We are building a web application designed specifically for BRF boards. It sits on top of Sortrace's data platform and transforms raw sorting events into visual dashboards, material breakdowns, and practical recommendations — without requiring technical expertise.",
+    sol_bdy2:"Each association can access only its own data through login. The interface is intentionally simple: everything a board needs to understand how the property is sorting and what should be improved. Nothing more, nothing less.",
+    sb1:"Visual trend dashboards", sb2:"Secure BRF login", sb3:"AI-powered chatbot",
+    sb4:"One-click PDF reports", sb5:"Personalized sorting tips",
+    ss1:"week sprint plan", ss2:"core features",
+    feat_lbl:"Core Features", feat_ttl:"Everything a BRF board needs — nothing it does not",
+    f1_h:"Secure login and BRF isolation", f1_p:"Board members sign in with email and password. Row-level security in the database ensures each association can only see its own data — GDPR-aligned from day one.",
+    f2_h:"Dashboard with KPIs and charts", f2_p:"Miss-sort rate, total analyses, trend lines over time, and material breakdowns — all in one view. Filter by time period, material type, or container.",
+    f3_h:"Sorting guide and personalized tips", f3_p:"A built-in guide explains correct sorting by material type. The dashboard also highlights personalized tips for the specific materials where the BRF performs worst.",
+    f4_h:"PDF and CSV report export", f4_p:"Generate board-ready reports with KPIs, charts, and material breakdowns. Choose period — monthly, quarterly, or yearly — and export in one click.",
+    f5_h:"AI chatbot", f5_p:"Ask questions in plain language. The assistant uses the BRF's actual sorting data and national sorting rules to deliver specific, actionable answers.",
+    tech_lbl:"Technology Stack", tech_ttl:"Built on a modern, <em>deployment-ready</em> foundation",
+    tech_bdy:"The application is architected for real deployment. A data abstraction layer enables development against realistic test data and a seamless later switch to the real Sortrace API without rewriting the application.",
+    about_lbl:"About the Project",
+    about_ttl:"A student project built for a real startup — with real impact",
+    about_bdy:"This application is developed as an external project in collaboration with Sortrace, a Swedish AI startup redefining how waste-sorting data is collected and understood. The project is part of course II1305 at KTH, where engineering students in information technology design and build real software products together with industry partners. Our goal is to bridge the gap between data collection and data understanding — and give BRF boards the tools to make their properties greener and more sustainable.",
+    cc1_sub:"External Partner", cc1_det:"AI-driven waste analysis · Sweden",
+    cc2_sub:"Institution", cc2_det:"Engineering · Information Technology",
+    cc3_sub:"Student Team", cc3_det:"Course II1305 · Spring 2026",
+    course_pill:"Course <strong>II1305</strong> — Project in Information Technology &nbsp;·&nbsp; KTH &nbsp;·&nbsp; Spring 2026",
+    contact_lbl:"Contact the Team",
+    contact_ttl:"Get in touch with the development team",
+    contact_bdy:"Have questions about the project, want to learn more, or are interested in collaboration? Reach out to any member of Group Ersmark directly.",
+    role_po:"Product Owner", role_sm:"Scrum Master", role_dev:"Developer",
+    footer_text:"Sortrace Waste App &nbsp;·&nbsp; II1305 Project &nbsp;·&nbsp; Group Ersmark at KTH &nbsp;·&nbsp; Spring 2026",
+    devlog_lbl:"Dev Log", devlog_ttl:"Day-by-day progress",
+    devlog_bdy:"An ongoing log of what the team has built and delivered. Add new entries at the top of the #devlogFeed div in the HTML code.",
   },
   sv: {
     nav_problem:"Problem", nav_solution:"Lösning", nav_features:"Funktioner",
@@ -1056,24 +1071,30 @@ let currentLang = 'en';
  
 function applyLang(lang) {
   currentLang = lang;
-  const t = i18n[lang];
+  const translations = i18n[lang];
   document.documentElement.setAttribute('data-lang', lang);
  
   // text nodes
   document.querySelectorAll('[data-i18n]').forEach(el => {
     const key = el.getAttribute('data-i18n');
-    if (t[key] !== undefined) el.innerHTML = t[key];
+    if (translations[key]) {
+      el.innerHTML = translations[key];
+    } else {
+      console.warn(`Missing translation for key: ${key}`);
+    }
   });
  
   // placeholders
   document.querySelectorAll('[data-i18n-placeholder]').forEach(el => {
     const key = el.getAttribute('data-i18n-placeholder');
-    if (t[key] !== undefined) el.setAttribute('value', t[key]);
+    if (translations[key]) {
+      el.setAttribute('value', translations[key]);
+    }
   });
  
   // animated hero words
   const wordEls = document.querySelectorAll('.hero-word');
-  const words = t.hero_words || i18n.en.hero_words;
+  const words = translations.hero_words || i18n.en.hero_words;
   wordEls.forEach((el, i) => {
     el.textContent = words[i] || '';
   });
