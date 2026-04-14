@@ -38,26 +38,40 @@
        LANGUAGE TOGGLE
     ══════════════════════════════════════ */
     .lang-toggle {
-      display: flex; align-items: center; gap: .35rem;
-      border: 1px solid rgba(45,106,79,.2);
-      border-radius: 2rem; overflow: hidden;
-      background: var(--white);
+      display: flex; align-items: center; gap: .45rem;
     }
-    .lang-btn {
-      display: flex; align-items: center; gap: .32rem;
-      padding: .32rem .75rem;
+    .lang-label {
       font-size: .75rem; font-weight: 600; letter-spacing: .03em;
       color: var(--text-muted);
-      background: transparent; border: none;
-      cursor: pointer; transition: background .18s, color .18s;
-      white-space: nowrap;
+      transition: color .18s;
+      user-select: none;
+      cursor: pointer;
     }
-    .lang-btn .flag { font-size: .95rem; }
-    .lang-btn.active {
-      background: var(--green-mid); color: var(--white);
-      border-radius: 2rem;
+    .lang-label.active { color: var(--green-deep); font-weight: 700; }
+    .lang-switch {
+      position: relative;
+      width: 38px; height: 21px;
+      background: var(--green-mid);
+      border-radius: 11px;
+      cursor: pointer;
+      border: none;
+      padding: 0;
+      transition: background .25s;
+      flex-shrink: 0;
     }
-    .lang-btn:hover:not(.active) { background: var(--cream); color: var(--green-mid); }
+    .lang-switch::after {
+      content: '';
+      position: absolute;
+      top: 3px; left: 3px;
+      width: 15px; height: 15px;
+      border-radius: 50%;
+      background: var(--white);
+      box-shadow: 0 1px 3px rgba(0,0,0,.18);
+      transition: transform .25s cubic-bezier(.4,0,.2,1);
+    }
+    .lang-switch.sv::after {
+      transform: translateX(17px);
+    }
  
     /* ══════════════════════════════════════
        NAV
@@ -99,11 +113,10 @@
     ══════════════════════════════════════ */
     .hero {
       min-height: 92vh;
-      padding: 0 5% 0 6%;
-      display: grid;
-      grid-template-columns: 1.05fr .95fr;
+      padding: 0 5%;
+      display: flex;
       align-items: center;
-      gap: 5rem;
+      justify-content: center;
       position: relative; overflow: hidden;
     }
     .hero::before {
@@ -128,7 +141,7 @@
     .hero h1 {
       font-family: 'DM Serif Display', serif;
       font-size: clamp(2.4rem, 4.2vw, 3.5rem);
-      line-height: 1.09; letter-spacing: -.02em;
+      line-height: 1.2; letter-spacing: -.02em;
       color: var(--green-deep); margin-bottom: 1.35rem;
       opacity: 0; animation: fadeUp .65s .2s forwards;
     }
@@ -137,11 +150,12 @@
     .hero-word-row {
       display: inline-flex; align-items: center;
       position: relative;
-      height: 1.15em;
+      height: 1.35em;
       overflow: hidden;
       vertical-align: bottom;
       /* width grows to fit largest word — set a safe min */
       min-width: 5ch;
+      padding-right: 0.15em;
     }
     .hero-word {
       position: absolute; left: 0;
@@ -158,7 +172,7 @@
  
     .hero-sub {
       font-size: 1.02rem; font-weight: 300; line-height: 1.76;
-      color: var(--text-muted); max-width: 500px; margin-bottom: 2.25rem;
+      color: var(--text-muted); max-width: 600px; margin-bottom: 2.25rem;
       opacity: 0; animation: fadeUp .65s .33s forwards;
     }
     .hero-btns {
@@ -439,8 +453,7 @@
        RESPONSIVE
     ══════════════════════════════════════ */
     @media (max-width: 1000px) {
-      .hero { grid-template-columns: 1fr; min-height: auto; padding-top: 4rem; padding-bottom: 3rem; }
-      .hero-visual { display: none; }
+      .hero { min-height: auto; padding-top: 4rem; padding-bottom: 3rem; }
       .sol-grid, .tech-grid { grid-template-columns: 1fr; gap: 2.5rem; }
       .nav-links { display: none; }
       nav { padding: 1rem 1.5rem; }
@@ -562,12 +575,9 @@
   <div class="nav-right">
     <span class="nav-course">II1305 · KTH</span>
     <div class="lang-toggle">
-      <button class="lang-btn active" data-lang-btn="en">
-        <span class="flag"></span> Eng
-      </button>
-      <button class="lang-btn" data-lang-btn="sv">
-        <span class="flag"></span> Sve
-      </button>
+      <span class="lang-label active" id="langLabelEn">Eng</span>
+      <button class="lang-switch" id="langSwitch" aria-label="Toggle language"></button>
+      <span class="lang-label" id="langLabelSv">Sve</span>
     </div>
   </div>
 </nav>
@@ -604,54 +614,6 @@
     <div class="hero-btns">
       <a href="#features" class="hero-btn hero-btn-solid" data-i18n="hero_btn_features">Explore Features</a>
       <a href="#tech" class="hero-btn hero-btn-ghost" data-i18n="hero_btn_tech">See the Tech Stack</a>
-    </div>
-  </div>
- 
-  <div class="hero-visual">
-    <div class="mockup">
-      <div class="mockup-bar">
-        <div class="mdot" style="background:#ff5f56"></div>
-        <div class="mdot" style="background:#ffbd2e; margin-left:3px;"></div>
-        <div class="mdot" style="background:#27c93f; margin-left:3px;"></div>
-        <span class="mockup-bar-title" data-i18n="mockup_title">Sortrace BRF Dashboard</span>
-      </div>
-      <div class="mockup-body">
-        <div class="kpi-row">
-          <div class="kpi">
-            <div class="kpi-v">23%</div>
-            <div class="kpi-l" data-i18n="kpi1">Miss-sort rate</div>
-            <div class="kpi-t neg">▲ 2%</div>
-          </div>
-          <div class="kpi">
-            <div class="kpi-v">847</div>
-            <div class="kpi-l" data-i18n="kpi2">Pickups analysed</div>
-            <div class="kpi-t">▲ +12%</div>
-          </div>
-          <div class="kpi">
-            <div class="kpi-v">4</div>
-            <div class="kpi-l" data-i18n="kpi3">Problem materials</div>
-            <div class="kpi-t neg">—</div>
-          </div>
-        </div>
-        <div class="chart-box">
-          <div class="chart-ttl" data-i18n="chart_title">Miss-sorting by material</div>
-          <div class="bars">
-            <div class="bcol"><div class="bar" style="height:62%;background:var(--green-mid);"></div><div class="blbl" data-i18n="mat_paper">Paper</div></div>
-            <div class="bcol"><div class="bar" style="height:82%;background:var(--accent);"></div><div class="blbl" data-i18n="mat_food">Food</div></div>
-            <div class="bcol"><div class="bar" style="height:38%;background:var(--green-mid);"></div><div class="blbl" data-i18n="mat_glass">Glass</div></div>
-            <div class="bcol"><div class="bar" style="height:54%;background:var(--green-bright);"></div><div class="blbl" data-i18n="mat_plastic">Plastic</div></div>
-            <div class="bcol"><div class="bar" style="height:26%;background:var(--green-mid);"></div><div class="blbl" data-i18n="mat_metal">Metal</div></div>
-          </div>
-        </div>
-        <div class="chart-box">
-          <div class="chart-ttl" data-i18n="ai_title">AI Assistant</div>
-          <div class="chat-msg" data-i18n="ai_msg">Food waste is your biggest challenge. Placing reminder signs near food bins typically reduces miss-sorting by 15–20%.</div>
-          <div class="chat-row">
-            <input class="chat-inp" data-i18n-placeholder="ai_input" value="What should we improve this month?" readonly />
-            <button class="chat-btn">→</button>
-          </div>
-        </div>
-      </div>
     </div>
   </div>
 </section>
@@ -767,7 +729,7 @@
     </div>
     <div class="f-card">
       <div class="f-ico"><i data-lucide="message-square"></i></div>
-      <h3 data-i18n="f5_h">AI Chatbot</h3>
+      <h3 data-i18n="f5_h">AI Chatbot (Claude-powered)</h3>
       <p data-i18n="f5_p">Ask questions in plain language. The assistant is grounded in the BRF's actual sorting data and national sorting regulations, so answers are specific and actionable rather than generic.</p>
     </div>
   </div>
@@ -801,6 +763,21 @@
           <div class="s-pip"></div>
           <div class="s-name">Tailwind + shadcn/ui</div>
           <div class="s-desc">Accessible, composable UI components</div>
+        </div>
+        <div class="stack-row">
+          <div class="s-pip"></div>
+          <div class="s-name">Recharts</div>
+          <div class="s-desc">Bar charts · Line trends · Material pie charts</div>
+        </div>
+        <div class="stack-row">
+          <div class="s-pip"></div>
+          <div class="s-name">Anthropic Claude API</div>
+          <div class="s-desc">RAG-powered chatbot · Streamed responses</div>
+        </div>
+        <div class="stack-row">
+          <div class="s-pip"></div>
+          <div class="s-name">Vercel + GitHub CI/CD</div>
+          <div class="s-desc">Automated builds · Preview deployments per PR</div>
         </div>
       </div>
     </div>
@@ -895,7 +872,7 @@
       <div class="contact-info">
         <div class="contact-name">Filip Kehl</div>
         <div class="contact-role" data-i18n="role_po">Product Owner</div>
-        <a class="contact-email" href="mailto:fkehl@kth.se"><i data-lucide="mail"></i> fkehl@kth.se</a>
+        <a class="contact-email" href="/cdn-cgi/l/email-protection#05636e606d69456e716d2b7660"><i data-lucide="mail"></i> <span class="__cf_email__" data-cfemail="d6b0bdb3beba96bda2bef8a5b3">[email&#160;protected]</span></a>
       </div>
     </div>
  
@@ -904,7 +881,7 @@
       <div class="contact-info">
         <div class="contact-name">Casper Waller</div>
         <div class="contact-role" data-i18n="role_sm">Scrum Master</div>
-        <a class="contact-email" href="mailto:cwaller@kth.se"><i data-lucide="mail"></i> cwaller@kth.se</a>
+        <a class="contact-email" href="/cdn-cgi/l/email-protection#ef8c988e83838a9daf849b87c19c8a"><i data-lucide="mail"></i> <span class="__cf_email__" data-cfemail="ccafbbada0a0a9be8ca7b8a4e2bfa9">[email&#160;protected]</span></a>
       </div>
     </div>
  
@@ -913,7 +890,7 @@
       <div class="contact-info">
         <div class="contact-name">Michael Leniker</div>
         <div class="contact-role" data-i18n="role_dev">Developer</div>
-        <a class="contact-email" href="mailto:mleniker@kth.se"><i data-lucide="mail"></i> mleniker@kth.se</a>
+        <a class="contact-email" href="/cdn-cgi/l/email-protection#026f6e676c6b6967704269766a2c7167"><i data-lucide="mail"></i> <span class="__cf_email__" data-cfemail="1c717079727577796e5c776874326f79">[email&#160;protected]</span></a>
       </div>
     </div>
  
@@ -922,7 +899,7 @@
       <div class="contact-info">
         <div class="contact-name">Lewi Långdal Lidman</div>
         <div class="contact-role" data-i18n="role_dev">Developer</div>
-        <a class="contact-email" href="mailto:lewi@kth.se"><i data-lucide="mail"></i> lewi@kth.se</a>
+        <a class="contact-email" href="/cdn-cgi/l/email-protection#a6cac3d1cfe6cdd2ce88d5c3"><i data-lucide="mail"></i> <span class="__cf_email__" data-cfemail="264a43514f664d524e085543">[email&#160;protected]</span></a>
       </div>
     </div>
  
@@ -931,7 +908,7 @@
       <div class="contact-info">
         <div class="contact-name">Jonas Sedig</div>
         <div class="contact-role" data-i18n="role_dev">Developer</div>
-        <a class="contact-email" href="mailto:onsed@kth.se"><i data-lucide="mail"></i> onsed@kth.se</a>
+        <a class="contact-email" href="/cdn-cgi/l/email-protection#036c6d7066674368776b2d7066"><i data-lucide="mail"></i> <span class="__cf_email__" data-cfemail="016e6f726465416a75692f7264">[email&#160;protected]</span></a>
       </div>
     </div>
  
@@ -940,7 +917,7 @@
       <div class="contact-info">
         <div class="contact-name">Abdurrahman Giumale</div>
         <div class="contact-role" data-i18n="role_dev">Developer</div>
-        <a class="contact-email" href="mailto:agiumale@kth.se"><i data-lucide="mail"></i> agiumale@kth.se</a>
+        <a class="contact-email" href="/cdn-cgi/l/email-protection#ccadaba5b9a1ada0a98ca7b8a4e2bfa9"><i data-lucide="mail"></i> <span class="__cf_email__" data-cfemail="09686e607c6468656c49627d61277a6c">[email&#160;protected]</span></a>
       </div>
     </div>
  
@@ -949,7 +926,7 @@
       <div class="contact-info">
         <div class="contact-name">Ludvig Leijel</div>
         <div class="contact-role" data-i18n="role_dev">Developer</div>
-        <a class="contact-email" href="mailto:lleijel@kth.se"><i data-lucide="mail"></i> lleijel@kth.se</a>
+        <a class="contact-email" href="/cdn-cgi/l/email-protection#0965656c60636c6549627d61277a6c"><i data-lucide="mail"></i> <span class="__cf_email__" data-cfemail="0d616168646768614d667965237e68">[email&#160;protected]</span></a>
       </div>
     </div>
  
@@ -1105,18 +1082,30 @@ function applyLang(lang) {
   wordEls.forEach((el, i) => {
     el.textContent = words[i] || '';
   });
+
+  // recalculate row width for new words
+  if (typeof window.recalcHeroWidth === 'function') window.recalcHeroWidth();
  
-  // lang buttons
-  document.querySelectorAll('[data-lang-btn]').forEach(btn => {
-    btn.classList.toggle('active', btn.getAttribute('data-lang-btn') === lang);
-  });
+  // lang toggle switch
+  const sw = document.getElementById('langSwitch');
+  const lblEn = document.getElementById('langLabelEn');
+  const lblSv = document.getElementById('langLabelSv');
+  if (sw) sw.classList.toggle('sv', lang === 'sv');
+  if (lblEn) lblEn.classList.toggle('active', lang === 'en');
+  if (lblSv) lblSv.classList.toggle('active', lang === 'sv');
  
   // update html lang attr
   document.documentElement.lang = lang === 'sv' ? 'sv' : 'en';
 }
  
-document.querySelectorAll('[data-lang-btn]').forEach(btn => {
-  btn.addEventListener('click', () => applyLang(btn.getAttribute('data-lang-btn')));
+document.getElementById('langSwitch').addEventListener('click', function() {
+  applyLang(currentLang === 'en' ? 'sv' : 'en');
+});
+document.getElementById('langLabelEn').addEventListener('click', function() {
+  if (currentLang !== 'en') applyLang('en');
+});
+document.getElementById('langLabelSv').addEventListener('click', function() {
+  if (currentLang !== 'sv') applyLang('sv');
 });
  
 /* ─────────────────────────────────────────
@@ -1139,8 +1128,10 @@ document.querySelectorAll('[data-lang-btn]').forEach(btn => {
       w.style.opacity = '';
       if (w2 > maxW) maxW = w2;
     });
-    row.style.width = maxW + 'px';
+    row.style.width = (maxW + 8) + 'px';
   }
+  // expose globally so applyLang can recalculate after word swap
+  window.recalcHeroWidth = setRowWidth;
  
   function activate(idx) {
     words.forEach((w, i) => {
@@ -1159,30 +1150,36 @@ document.querySelectorAll('[data-lang-btn]').forEach(btn => {
       current = (current + 1) % words.length;
       words[prev].classList.remove('active');
       words[prev].classList.add('exit-up');
-      setTimeout(() => {
-        words[prev].classList.remove('exit-up');
-        activate(current);
-      }, 80);
-    }, 2200);
+      words[current].classList.remove('exit-up');
+      words[current].classList.add('active');
+    }, 2400);
   });
-})();
- 
 
+  window.addEventListener('resize', setRowWidth);
+})();
 
 /* ─────────────────────────────────────────
-   DEV LOG SCROLL ANIMATION
+   LUCIDE ICONS (inline replacement)
+───────────────────────────────────────── */
+/* If lucide is loaded from CDN, call createIcons */
+if (typeof lucide !== 'undefined') { lucide.createIcons(); }
+
+/* ─────────────────────────────────────────
+   DEV LOG SCROLL REVEAL
 ───────────────────────────────────────── */
 (function() {
   const entries = document.querySelectorAll('.dl-entry');
-  const obs = new IntersectionObserver(list => {
-    list.forEach((e, i) => {
-      if (e.isIntersecting) setTimeout(() => e.target.classList.add('dl-visible'), i * 60);
+  if (!entries.length) return;
+  const obs = new IntersectionObserver((items) => {
+    items.forEach(item => {
+      if (item.isIntersecting) {
+        item.target.classList.add('dl-visible');
+        obs.unobserve(item.target);
+      }
     });
-  }, { threshold: 0.1 });
-  entries.forEach(el => obs.observe(el));
+  }, { threshold: 0.15 });
+  entries.forEach(e => obs.observe(e));
 })();
-
 </script>
-<script src="https://unpkg.com/lucide@0.383.0/dist/umd/lucide.min.js" onload="lucide.createIcons()"></script>
 </body>
 </html>
