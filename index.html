@@ -336,16 +336,22 @@
     /* ══════════════════════════════════════
        TECH + SPRINT TIMELINE
     ══════════════════════════════════════ */
-    .tech { background: var(--white); }
-    .tech-grid { display: grid; grid-template-columns: 1fr; gap: 5.5rem; align-items: start; }
-    .stack { margin-top: 2.2rem; }
+    .tech { background: var(--white); text-align: center; }
+    .tech-grid { display: grid; grid-template-columns: 1fr; gap: 5.5rem; align-items: start; justify-items: center; }
+    .tech .ttl,
+    .tech .bdy {
+      margin-left: auto;
+      margin-right: auto;
+      text-align: center;
+    }
+    .stack { margin: 2.2rem auto 0; width: min(760px, 100%); }
     .stack-row {
-      display: flex; align-items: center; gap: 1rem;
+      display: flex; align-items: center; justify-content: center; gap: 1rem;
       padding: .82rem 0; border-bottom: 1px solid var(--cream-warm);
     }
     .stack-row:last-child { border-bottom: none; }
     .s-pip { width: 7px; height: 7px; border-radius: 50%; background: var(--green-bright); flex-shrink: 0; }
-    .s-name { font-weight: 600; font-size: .9rem; color: var(--green-deep); min-width: 138px; }
+    .s-name { font-weight: 600; font-size: .9rem; color: var(--green-deep); min-width: 0; }
     .s-desc { font-size: .845rem; color: var(--text-muted); }
  
  
@@ -767,18 +773,18 @@
       <div class="stack">
         <div class="stack-row">
           <div class="s-pip"></div>
-          <div class="s-name">Next.js 16</div>
-          <div class="s-desc">App Router · TypeScript · Server Components</div>
+          <div class="s-name" data-i18n="tech_s1_name">Next.js 16</div>
+          <div class="s-desc" data-i18n="tech_s1_desc">App Router · TypeScript · Server Components</div>
         </div>
         <div class="stack-row">
           <div class="s-pip"></div>
-          <div class="s-name">Supabase</div>
-          <div class="s-desc">PostgreSQL · Auth · Row Level Security</div>
+          <div class="s-name" data-i18n="tech_s2_name">React</div>
+          <div class="s-desc" data-i18n="tech_s2_desc">Component-based UI · Reusable stateful views · Fast rendering</div>
         </div>
         <div class="stack-row">
           <div class="s-pip"></div>
-          <div class="s-name">Tailwind + shadcn/ui</div>
-          <div class="s-desc">Accessible, composable UI components</div>
+          <div class="s-name" data-i18n="tech_s3_name">Tailwind + shadcn/ui</div>
+          <div class="s-desc" data-i18n="tech_s3_desc">Accessible, composable UI components</div>
         </div>
       </div>
     </div>
@@ -869,11 +875,10 @@
      CONTACT
 ══════════════════════════════════ -->
 <section class="contact" id="contact">
-  <div class="lbl" data-i18n="contact_lbl">Contact the Team</div>
-  <h2 class="ttl" data-i18n="contact_ttl">Get in touch with the development team</h2>
-  <p class="bdy" data-i18n="contact_bdy">
-    Have questions about the project, want to learn more, or are interested in a collaboration?
-    Reach out to any member of Group Ersmark directly.
+  <div class="lbl" data-i18n="contact_lbl" style="text-align: center;">Contact the Team</div>
+  <h2 class="ttl" data-i18n="contact_ttl" style="text-align: center; margin-left: auto; margin-right: auto;">Get in touch with the development team</h2>
+  <p class="bdy" data-i18n="contact_bdy" style="padding-bottom: 25px; width: 100%; max-width: none; text-align: center;">
+    Have questions about the project, want to learn more, or are interested in a collaboration? Reach out to any member of Group Ersmark directly.
   </p>
   <div class="contact-grid">
  
@@ -994,6 +999,9 @@ const i18n = {
     f5_h:"AI chatbot", f5_p:"Ask questions in plain language. The assistant uses the BRF's actual sorting data and national sorting rules to deliver specific, actionable answers.",
     tech_lbl:"Technology Stack", tech_ttl:"Built on a modern, <em>deployment-ready</em> foundation",
     tech_bdy:"The application is architected for real deployment. A data abstraction layer enables development against realistic test data and a seamless later switch to the real Sortrace API without rewriting the application.",
+    tech_s1_name:"Next.js 16", tech_s1_desc:"App Router · TypeScript · Server Components",
+    tech_s2_name:"React", tech_s2_desc:"Component-based UI · Reusable stateful views · Fast rendering",
+    tech_s3_name:"Tailwind + shadcn/ui", tech_s3_desc:"Accessible, composable UI components",
     about_lbl:"About the Project",
     about_ttl:"A student project built for a real startup — with real impact",
     about_bdy:"This application is developed as an external project in collaboration with Sortrace, a Swedish AI startup redefining how waste-sorting data is collected and understood. The project is part of course II1305 at KTH, where engineering students in information technology design and build real software products together with industry partners. Our goal is to bridge the gap between data collection and data understanding — and give BRF boards the tools to make their properties greener and more sustainable.",
@@ -1003,7 +1011,7 @@ const i18n = {
     course_pill:"Course <strong>II1305</strong> — Project in Information Technology &nbsp;·&nbsp; KTH &nbsp;·&nbsp; Spring 2026",
     contact_lbl:"Contact the Team",
     contact_ttl:"Get in touch with the development team",
-    contact_bdy:"Have questions about the project, want to learn more, or are interested in collaboration? Reach out to any member of Group Ersmark directly.",
+    contact_bdy:"Have questions about the project, want to learn more? Reach out to any member of Group Ersmark directly.",
     role_po:"Product Owner", role_sm:"Scrum Master", role_dev:"Developer",
     footer_text:"Sortrace Waste App &nbsp;·&nbsp; II1305 Project &nbsp;·&nbsp; Group Ersmark at KTH &nbsp;·&nbsp; Spring 2026",
     devlog_lbl:"Dev Log", devlog_ttl:"Day-by-day progress",
@@ -1047,6 +1055,9 @@ const i18n = {
     f5_h:"AI-chatbot", f5_p:"Ställ frågor på vanlig svenska. Assistenten baseras på BRF:ens faktiska sorteringsdata och nationella sorteringsregler, vilket ger specifika och handlingsinriktade svar.",
     tech_lbl:"Teknologistack", tech_ttl:"Byggd på en modern, <em>driftsättningsklar</em> grund",
     tech_bdy:"Applikationen är arkitekterad för verklig driftsättning. Ett dataabstraheringslager möjliggör utveckling mot realistisk testdata och ett sömlöst byte till det riktiga Sortrace API:et senare utan att skriva om applikationen.",
+    tech_s1_name:"Next.js 16", tech_s1_desc:"App Router · TypeScript · Server Components",
+    tech_s2_name:"React", tech_s2_desc:"Komponentbaserat UI · Återanvändbara tillståndsstyrda vyer · Snabb rendering",
+    tech_s3_name:"Tailwind + shadcn/ui", tech_s3_desc:"Tillgängliga, komponerbara UI-komponenter",
     about_lbl:"Om projektet",
     about_ttl:"Ett studentprojekt byggt för ett riktigt startup — med verklig påverkan",
     about_bdy:"Denna applikation utvecklas som ett externt projekt i samarbete med Sortrace, ett svenskt AI-startup som omdefinierar hur avfallssorteringsdata samlas in och förstås. Projektet ingår i kursen II1305 vid KTH, där civilingenjörsstudenter inom informationsteknik utformar och bygger riktiga mjukvaruprodukter tillsammans med industriparter. Vårt mål är att överbrygga klyftan mellan datainsamling och dataförståelse — och ge BRF-styrelser verktygen att göra sina fastigheter grönare och mer hållbara.",
@@ -1056,7 +1067,7 @@ const i18n = {
     course_pill:"Kurs <strong>II1305</strong> — Projekt i informationsteknik &nbsp;·&nbsp; KTH &nbsp;·&nbsp; Vår 2026",
     contact_lbl:"Kontakta teamet",
     contact_ttl:"Ta kontakt med utvecklingsteamet",
-    contact_bdy:"Har du frågor om projektet, vill lära dig mer eller är intresserad av samarbete? Kontakta valfri medlem i Grupp Ersmark direkt.",
+    contact_bdy:"Har du frågor om projektet, vill lära dig mer? Kontakta valfri medlem i Grupp Ersmark direkt.",
     role_po:"Produktägare", role_sm:"Scrum Master", role_dev:"Utvecklare",
     footer_text:"Sortrace Waste App &nbsp;·&nbsp; II1305 Projekt &nbsp;·&nbsp; Grupp Ersmark vid KTH &nbsp;·&nbsp; Vår 2026",
     devlog_lbl:"Dagbok", devlog_ttl:"Dag-för-dag-framsteg",
