@@ -286,26 +286,18 @@
     ══════════════════════════════════════ */
     .solution { background: var(--white); }
     .sol-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: center; }
-    .sol-panel {
-      background: var(--green-pale); border-radius: 1.15rem; padding: 1.85rem;
-      display: flex; flex-direction: column; gap: .8rem;
+    .sol-screenshot {
+      border-radius: 1.15rem;
+      overflow: hidden;
+      box-shadow: 0 28px 80px rgba(26,58,42,.18), 0 4px 16px rgba(26,58,42,.08);
+      width: 100%;
+      line-height: 0;
+      font-size: 0;
+      background: var(--white);
     }
-    .sol-row { display: flex; gap: .7rem; }
-    .sol-badge {
-      background: var(--white); border-radius: .55rem; padding: .7rem .95rem; flex: 1;
-      font-size: .79rem; font-weight: 600; color: var(--green-deep);
-      display: flex; align-items: center; gap: .55rem;
-      box-shadow: 0 2px 8px rgba(26,58,42,.07);
+    .sol-screenshot img {
+      width: 100%; height: auto; display: block;
     }
-    .sol-badge svg { width: .95rem; height: .95rem; color: var(--green-mid); flex-shrink: 0; }
-    .sol-stats { display: flex; gap: .7rem; }
-    .sol-stat {
-      flex: 1; background: var(--green-mid); color: var(--white);
-      border-radius: .55rem; padding: .8rem .95rem;
-      box-shadow: 0 4px 18px rgba(45,106,79,.26);
-    }
-    .sol-stat-v { font-family: 'DM Serif Display', serif; font-size: 1.5rem; }
-    .sol-stat-l { font-size: .71rem; opacity: .72; margin-top: .08rem; }
  
     /* ══════════════════════════════════════
        FEATURES
@@ -684,39 +676,19 @@
       <div class="lbl" data-i18n="sol_lbl">Our Solution</div>
       <h2 class="ttl" data-i18n="sol_ttl">A clear dashboard that turns sorting data into <em>board-ready insights</em></h2>
       <p class="bdy" data-i18n="sol_bdy1">
-        We are building a web application designed specifically for BRF board members. It sits on top of
-        Sortrace's data infrastructure and translates raw sorting events into visual dashboards,
-        material-level breakdowns, and practical recommendations — without requiring any technical knowledge.
+        Our dashboard gives BRF boards an instant overview of their building's sorting performance —
+        miss-sorting rate, total pickups analysed, material breakdowns, and estimated extra costs,
+        all updated automatically and presented without any technical setup.
       </p>
       <p class="bdy" style="margin-top:.9rem;" data-i18n="sol_bdy2">
-        Each association accesses only its own data through a secure login. The interface is deliberately
-        simple: everything a board needs to understand how their building sorts waste and what to do about it.
-        Nothing more, nothing less.
+        Trend charts show how sorting behaviour changes over time, and a material breakdown highlights
+        exactly where problems occur — from plastic and food waste to paper and electronics.
+        Each association sees only its own data through a secure login.
       </p>
     </div>
     <div>
-      <div class="sol-panel">
-        <div class="sol-row">
-          <div class="sol-badge"><i data-lucide="trending-up"></i> <span data-i18n="sb1">Visual trend dashboards</span></div>
-          <div class="sol-badge"><i data-lucide="lock"></i> <span data-i18n="sb2">Secure BRF login</span></div>
-        </div>
-        <div class="sol-row">
-          <div class="sol-badge"><i data-lucide="bot"></i> <span data-i18n="sb3">AI-powered chatbot</span></div>
-          <div class="sol-badge"><i data-lucide="file-text"></i> <span data-i18n="sb4">One-click PDF reports</span></div>
-        </div>
-        <div class="sol-row">
-          <div class="sol-badge"><i data-lucide="lightbulb"></i> <span data-i18n="sb5">Personalised sorting tips</span></div>
-        </div>
-        <div class="sol-stats">
-          <div class="sol-stat">
-            <div class="sol-stat-v">4</div>
-            <div class="sol-stat-l" data-i18n="ss1">week sprint plan</div>
-          </div>
-          <div class="sol-stat">
-            <div class="sol-stat-v">5</div>
-            <div class="sol-stat-l" data-i18n="ss2">core features</div>
-          </div>
-        </div>
+      <div class="sol-screenshot">
+        <img src="Sortraceapp_example.PNG" alt="Sortrace BRF dashboard showing waste sorting statistics" />
       </div>
     </div>
   </div>
@@ -1020,8 +992,8 @@ const i18n = {
     p4_h:"No guidance on next steps", p4_p:"Even when boards can see the numbers, they often lack practical advice on what to actually do about them — especially for the worst-performing materials and containers.",
     sol_lbl:"Our Solution",
     sol_ttl:"A clear dashboard that turns sorting data into <em>board-ready insights</em>",
-    sol_bdy1:"We are building a web application designed specifically for BRF boards. It sits on top of Sortrace's data platform and transforms raw sorting events into visual dashboards, material breakdowns, and practical recommendations — without requiring technical expertise.",
-    sol_bdy2:"Each association can access only its own data through login. The interface is intentionally simple: everything a board needs to understand how the property is sorting and what should be improved. Nothing more, nothing less.",
+    sol_bdy1:"Our dashboard gives BRF boards an instant overview of their building's sorting performance — miss-sorting rate, total pickups analysed, material breakdowns, and estimated extra costs, all updated automatically and presented without any technical setup.",
+    sol_bdy2:"Trend charts show how sorting behaviour changes over time, and a material breakdown highlights exactly where problems occur — from plastic and food waste to paper and electronics. Each association sees only its own data through a secure login.",
     sb1:"Visual trend dashboards", sb2:"Secure BRF login", sb3:"AI-powered chatbot",
     sb4:"One-click PDF reports", sb5:"Personalized sorting tips",
     ss1:"week sprint plan", ss2:"core features",
@@ -1076,8 +1048,8 @@ const i18n = {
     p4_h:"Ingen vägledning kring nästa steg", p4_p:"Även när styrelser kan läsa siffrorna saknar de ofta praktiska råd om vad de faktiskt ska göra — framför allt för sämst presterande material och kärl.",
     sol_lbl:"Vår lösning",
     sol_ttl:"En tydlig dashboard som omvandlar sorteringsdata till <em>styrelseredo insikter</em>",
-    sol_bdy1:"Vi bygger en webbapplikation utformad specifikt för BRF-styrelser. Den vilar ovanpå Sortrace dataplattform och omvandlar råa sorteringshändelser till visuella dashboards, materialuppdelningar och praktiska rekommendationer — utan tekniska förkunskaper.",
-    sol_bdy2:"Varje förening når enbart sin egen data via inloggning. Gränssnittet är medvetet enkelt: allt en styrelse behöver för att förstå hur fastigheten sorterar och vad som bör göras åt det. Inget mer, inget mindre.",
+    sol_bdy1:"Vår dashboard ger BRF-styrelser en omedelbar överblick över fastighetens sorteringsprestanda — felsorteringsandel, antal genomförda analyser, materialuppdelning och uppskattade merkostnader, allt uppdaterat automatiskt utan teknisk konfiguration.",
+    sol_bdy2:"Trenddiagram visar hur sorteringsbeteendet förändras över tid, och materialuppdelningen pekar ut exakt var problemen uppstår — från plast och matavfall till papper och elektronik. Varje förening ser enbart sin egen data via säker inloggning.",
     sb1:"Visuella trenddashboards", sb2:"Säker BRF-inloggning", sb3:"AI-driven chatbot",
     sb4:"PDF-rapporter med ett klick", sb5:"Personliga sorteringstips",
     ss1:"veckorssprint-plan", ss2:"kärnfunktioner",
